@@ -1,0 +1,13 @@
+/* Mobile */
+@media only screen and (max-width: 47.9375em) {
+    .headerFlex {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .headerbuttons {
+        padding-left: 0px;
+        margin-left: 0px;
+        margin-top: 10px;
+    }
+}

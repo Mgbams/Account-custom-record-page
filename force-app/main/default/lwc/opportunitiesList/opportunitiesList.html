@@ -1,0 +1,22 @@
+<template>
+    <lightning-card title="Opportunitiés de ma BU">
+        <lightning-tabset>
+            <lightning-tab label="Ouvertes (5)">
+                <div style="height: 300px;">
+                    <lightning-datatable
+                            key-field="id"
+                            data={data}
+                            columns={columns}
+                            onrowaction={handleRowAction}>
+                    </lightning-datatable>
+                </div>
+            </lightning-tab>
+            <lightning-tab label="Fermées gagnées (80)">
+                Two Content
+            </lightning-tab>
+            <lightning-tab label="Fermées Perdues (15)">
+                Three Content !
+            </lightning-tab>
+        </lightning-tabset>
+   </lightning-card>
+</template>

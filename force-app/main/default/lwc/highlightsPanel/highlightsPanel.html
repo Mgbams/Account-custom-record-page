@@ -1,0 +1,57 @@
+<template>
+    <div class="slds-page-header slds-page-header_record-home parentof-header">
+      <div class="slds-page-header__row headerFlex">
+        <div class="slds-page-header__col-title">
+          <div class="slds-media">
+            <div class="slds-media__figure">
+              <lightning-icon class="accountExistInRcuAndBu" icon-name="standard:account"></lightning-icon>
+            </div>
+            <div class="slds-media__body">
+              <div class="slds-page-header__name">
+                <div class="slds-page-header__name-title show_as_row">
+                  <h1 class>
+                    <span class="slds-var-m-bottom_medium">Brown</span>
+                    <span class="slds-page-header__title slds-truncate">King</span>
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-page-header__col-actions headerbuttons">
+          <div class="slds-page-header__controls">
+            <div class="slds-page-header__control">
+              <ul class="slds-button-group-list">
+                <template if:true={isCreateModify}>
+                  <li>
+                    <lightning-button-menu label="Créer" icon-position="right" class="slds-var-p-around_xxx-small slds-var-m-right_large" icon-name="utility:down" onselect={handleMenuItem}>
+                        <lightning-menu-item label="Opportunite" icon-name="utility:new" value="opportunity"></lightning-menu-item>
+                        <lightning-menu-item label="Evènement" icon-name="utility:new" value="evenement"></lightning-menu-item>
+                   </lightning-button-menu>
+                  </li>
+                  <li>
+                    <lightning-button label="Modifier"></lightning-button>
+                  </li>
+                </template>
+                <li>
+                   <!--Contacts-->
+                   <template if:true={isCreateContact}>
+                    <lightning-button variant="base" icon-name="utility:settings" onclick={handleClick} class="slds-var-p-around_medium"></lightning-button>
+                    <lightning-button variant="base" icon-name="utility:refresh" onclick={handleClick} class="slds-var-p-around_medium"></lightning-button>
+                    <lightning-button variant="Neutral" label="Nouveau Contact" onclick={handleClick} ></lightning-button>
+                    <lightning-button variant="Neutral" label="Ajouter une rélation" onclick={handleClick} class="slds-var-m-left_medium"></lightning-button>
+                  </template>
+                  <!--ContactsGL-->
+                  <template if:true={isCreateContactGl}>
+                    <lightning-button variant="base" icon-name="utility:settings" onclick={handleClick} class="slds-var-p-around_medium"></lightning-button>
+                    <lightning-button variant="base" icon-name="utility:refresh" onclick={handleClick} class="slds-var-p-around_medium"></lightning-button>
+                  </template>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+  

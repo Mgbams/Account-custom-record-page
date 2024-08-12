@@ -1,0 +1,36 @@
+<template>
+    <lightning-card>
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-2 slds-var-p-around_medium">
+                <lightning-input  label="Ancien Code NAF" value="25" read-only></lightning-input>
+                <lightning-input  label="Ancien Code NAF" value="25" read-only></lightning-input>
+                <lightning-input  label="Ancien Code NAF" value="25" read-only></lightning-input>
+                <lightning-input  label="Ancien Code NAF" value="25" read-only></lightning-input>
+                <lightning-input  label="Ancien Code NAF" value="25" read-only></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-2 slds-var-p-around_medium">
+                <lightning-input  label="Ancien Code NAF" value="25" read-only></lightning-input>
+                <lightning-input  label="Ancien Code NAF" value="25" read-only></lightning-input>
+                <lightning-input  label="Ancien Code NAF" value="25" read-only></lightning-input>
+                <lightning-input  label="Ancien Code NAF" value="25" read-only></lightning-input>
+                <lightning-input  label="Ancien Code NAF" value="25" read-only></lightning-input>
+            </div>
+        </div>
+        <div class="slds-grid slds-wrap custom-accordion-grid">
+            <div class="slds-col slds-size_1-of-2 custom-accordion-column">
+              <lightning-accordion class="gray-background" allow-multiple-sections-open onsectiontoggle={handleSectionToggle} active-section-name={activeSections}>
+                <lightning-accordion-section name="segmentation" label="Segmentation [Ma BU]">
+                  <lightning-input  label="Ancien Code NAF" value="25" read-only></lightning-input>
+                </lightning-accordion-section>
+              </lightning-accordion>
+            </div>
+            <div class="slds-col slds-size_1-of-2 custom-accordion-column">
+                <lightning-accordion class="gray-background" allow-multiple-sections-open onsectiontoggle={handleSectionToggle} active-section-name={activeSections}>
+                <lightning-accordion-section name="plusInfos" label="Plus de détails">
+                    <lightning-input label="Nouveau Code NAF" value="10" onchange={handleNouveauCodeNAFChange}></lightning-input>
+                </lightning-accordion-section>
+                </lightning-accordion>
+            </div>
+        </div>
+    </lightning-card>
+</template>

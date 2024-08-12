@@ -1,0 +1,36 @@
+<template>
+    <div>
+        <div>
+            <c-highlights-panel is-create-modify="true"></c-highlights-panel>
+        </div>
+    </div>
+    <lightning-card title="Synthèse d'opportunité - Groupe">
+        <div class="slds-grid">
+            <div class="slds-col">
+                <lightning-combobox
+                    name="progress"
+                    label="Période"
+                    value={value}
+                    placeholder="Select Progress"
+                    options={options}
+                    onchange={handleChange} class="slds-var-m-bottom_medium slds-var-p-left_medium">
+                </lightning-combobox>
+            </div>
+            <div class="slds-col"></div>
+            <div class="slds-col"></div>
+            <div class="slds-col"></div>
+        </div>
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-4">
+                <div class="chart slds-var-m-around_medium chart-container" lwc:dom="manual"></div>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-4 chartOppInfos">
+                <p class="slds-text-title_bold">Nombre total d'opportunités</p>
+                <p><span class="slds-var-p-right_medium slds-text-title_bold">105</span> <spa>+9% VS l'année précedente</spa></p>
+                
+                <p class="slds-var-m-top_xx-large slds-text-title_bold">Taux de transformation</p>
+                <p><span class="slds-var-p-right_medium slds-text-title_bold">62%</span> <spa>-2% VS l'année précedente</spa></p>
+            </div>
+        </div>
+    </lightning-card>
+</template>

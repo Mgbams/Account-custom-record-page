@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="Mes Contacts (2)"></lightning-card>
+    <c-highlights-panel is-create-contact="true"></c-highlights-panel>
+    <lightning-card>
+        <div style="height: 300px;">
+            <lightning-datatable
+                key-field="id"
+                data={data}
+                columns={columns}>
+         </lightning-datatable>
+        </div>
+   </lightning-card>
+</template>

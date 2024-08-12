@@ -1,0 +1,47 @@
+<template>
+    <lightning-layout class="slds-p-around_small">
+        <!--Show items per page label-->
+        <lightning-layout-item class="slds-m-top_small" size="2">Items per page: </lightning-layout-item>
+
+        <!--Show items per page dropdown-->
+        <lightning-layout-item class="slds-m-top_x-small" size="1">
+            <lightning-combobox value={ageSize} options={getItemsPerPage}
+                                onchange={handlePageSizeChange} variant="label-hidden">
+            </lightning-combobox>
+        </lightning-layout-item>
+        <lightning-layout-item size="1"></lightning-layout-item>
+
+        <!--Show total records-->
+        <lightning-layout-item class="slds-align_absolute-center" size="4">{recordsFrom} - {recordsTo} of {totalRecords}</lightning-layout-item>
+
+        <!--Show navigation buttons-->
+        <lightning-layout-item class="slds-text-align_right" size="4">
+            <a title="Go to first page" onclick={goToFirstPageHandler} class={previousButtonsStyle}>
+                &lt;&lt;
+            </a>
+            <a  label="<" title="Previous page" onclick={previousPageHandler} class={previousButtonsStyle}>
+                &lt;
+            </a>
+            <!-- DESIGN 1:-->
+            <select class="page-selector" onchange={goToPageHandler}>
+                <template for:each={pageNumbersForPicklist} for:item="option">
+                    <option key={option.value} value={option.value} selected={option.selected}>{option.label}</option>
+                </template>
+            </select>
+            <!-- DESIGN 2:-->
+            <!--<span class="m-15" >
+                <strong title="Current page number">{pageNumber}</strong> of
+                <span title="Total pages">{totalPages}</span>
+            </span>-->
+
+            <a title="Next page" onclick={nextPageHandler} class={nextButtonsStyle}>
+                &gt;
+            </a>
+
+            <!-- Use Also For DESIGN 1:-->
+            <a title="Go to last page" onclick={goToLastPageHandler} class={nextButtonsStyle}>
+                &gt;&gt;
+            </a>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

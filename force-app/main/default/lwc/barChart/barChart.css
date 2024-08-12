@@ -1,0 +1,6 @@
+/* Mobile */
+@media only screen and (max-width: 47.9375em) {
+    .chartOppInfos {
+       text-align: center;
+    }
+}
