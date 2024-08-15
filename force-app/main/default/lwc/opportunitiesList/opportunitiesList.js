@@ -1,5 +1,7 @@
-import { LightningElement } from 'lwc';
-import generateData from './generateData';
+import { LightningElement, wire } from 'lwc';
+import getOpportunities from '@salesforce/apex/PaginationDemoController.getOpportunities'; 
+import getTotalOpportunitiesCount from '@salesforce/apex/PaginationDemoController.getTotalOpportunitiesCount';
+import { preparePageDataUtil, paginationChangeHandlerUtil } from 'c/sharedCode';
 
 const actions = [
     { label: 'Show details', name: 'show_details' },
@@ -7,11 +9,9 @@ const actions = [
 ];
 
 const columns = [
-    { label: 'Name', fieldName: 'name' },
-    { label: 'Website', fieldName: 'website', type: 'url' },
-    { label: 'Phone', fieldName: 'phone', type: 'phone' },
-    { label: 'Balance', fieldName: 'amount', type: 'currency' },
-    { label: 'Close At', fieldName: 'closeAt', type: 'date' },
+    { label: 'Stage Name', fieldName: 'StageName' },
+    { label: 'Amount', fieldName: 'Amount' },
+    { label: 'AccountId', fieldName: 'AccountId', type: 'url'},
     {
         type: 'action',
         typeAttributes: { rowActions: actions },
@@ -22,9 +22,65 @@ export default class OpportunitiesList extends LightningElement {
     data = [];
     columns = columns;
     record = {};
+    isLoading = true;
+    error;
+    //PAGINATOR PROPERTIES
+    pageSize = 1; //10
+    totalRecords = 0;
+    pageNumber = 1;
+    enablePagination = true;
+    lastRecordId = '';
+    itemsPerPageOptions = [5, 10, 20, 50, 100];
+    _showPaginator;
+    _recordsToDisplay;
 
     connectedCallback() {
-        this.data = generateData({ amountOfRecords: 100 });
+        this.fetchRecordsFromServer();
+    }
+    
+    get hasRecords() {
+        return this.data.length > 0;
+    }
+
+    //pagination property - check whther to show the paginator
+    get showPaginator() {
+        return this.enablePagination && this.hasRecords;
+    }
+
+    set showPaginator(value) {
+        this._showPaginator = value;
+    }
+
+     //Get total records count
+    @wire(getTotalOpportunitiesCount)
+    wiredGetTotalOpportunitiesCount(result) {
+        if (result.data) {
+             this.totalRecords = parseInt(result.data);
+             this.showPaginator = (this.totalRecords > this.pageSize);
+        } else if(result.error) {
+             //
+        }
+    }
+
+    fetchRecordsFromServer() {
+        getOpportunities({pageSize: this.pageSize, lastRecordId: this.lastRecordId}).then(response => {
+            if (response) {
+                preparePageDataUtil(this, response);
+            }
+        });
+    }
+
+    paginationChangeHandler(event) {
+        paginationChangeHandlerUtil(event, this);
+    }
+
+    //Pagination property - calculate and return records to display
+    get recordsToDisplay() {
+        return this._recordsToDisplay;
+    }
+
+    set recordsToDisplay(value) {
+        this._recordsToDisplay = value;
     }
 
     handleRowAction(event) {

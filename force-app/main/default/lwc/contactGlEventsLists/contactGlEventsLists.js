@@ -60,40 +60,26 @@ export default class ContactGlEventsLists extends LightningElement {
             if (response) {
                 this.isLoading = false;
                 //this.recordsToDisplay = response;
-                console.log('RESPONSE ' +  JSON.stringify(response));
-                console.log('this.recordsToDisplay 44 ' +  JSON.stringify(this.recordsToDisplay));
                 this.data = [...this.data, ...response];
                 let from = (this.pageNumber - 1) * this.pageSize;
                 let to = this.pageSize * this.pageNumber;
                 this.recordsToDisplay = this.data?.slice(from, to);
-                console.log('data ' +  this.data);
             }
         });
     }
 
     paginationChangeHandler(event) {
-        console.log('GOT HERE');
-        console.log('event.detail ' + JSON.stringify(event.detail));
-        console.log('event.detail.pageSize ' + event.detail.pageSize);
         if (event.detail) {
             if(this.pageSize != event.detail.pageSize) {
                 this.data = []; // reset records array on page size change
                 this.pageSize = event.detail.pageSize;
-                console.log('pageSize is set here ');
             }
             this.pageNumber = event.detail.pageNumber;
-            console.log('pageSize 85 ' + this.pageSize);
-            console.log('pageNumber 86 ' + this.pageNumber);
-            console.log('data 87 ' + JSON.stringify(this.data));
-            //console.log('data 88 ' + JSON.stringify(this.data?.slice(0, this.pageSize)));
             if (this.data?.length < (this.pageSize * this.pageNumber)) { // Get more data from server
-                console.log('ENTERED 90 ');
                 this.lastRecordId = this.data[this.data.length - 1]?.Id;
-                console.log('data 92 ' + this.lastRecordId );
                 this.isLoading = true;
                 this.fetchRecordsFromServer();
             } else { // Get and show data from data list
-                console.log('ERROR 96 ');
                 let from = (this.pageNumber - 1) * this.pageSize;
                 let to = this.pageSize * this.pageNumber;
                 this.recordsToDisplay = this.data?.slice(from, to);
@@ -109,22 +95,4 @@ export default class ContactGlEventsLists extends LightningElement {
     set recordsToDisplay(value) {
         this._recordsToDisplay = value;
     }
-
-    /*@wire(getContactsGL, { pageSize: '$pageSize',  offset: 2 })
-    wiredContacts({ data, error }) {
-        this.isLoading = true;
-        if (data) {
-            this.data = data;
-            this.totalRecords = data.length;
-            this.isLoading = false;
-            this.error = undefined;
-        }
-
-        if (error) {
-            this.data = undefined;
-            this.isLoading = false;
-            // create a toast message below
-        }
-    }*/
-    
 }

@@ -1,10 +1,10 @@
 <template>
-    <lightning-layout class="slds-p-around_small">
+    <lightning-layout class="slds-var-p-around_small">
         <!--Show items per page label-->
-        <lightning-layout-item class="slds-m-top_small" size="2">Items per page: </lightning-layout-item>
+        <lightning-layout-item class="slds-var-m-top_small" size="2">Items per page: </lightning-layout-item>
 
         <!--Show items per page dropdown-->
-        <lightning-layout-item class="slds-m-top_x-small" size="1">
+        <lightning-layout-item class="slds-var-m-top_x-small" size="1">
             <lightning-combobox value={ageSize} options={getItemsPerPage}
                                 onchange={handlePageSizeChange} variant="label-hidden">
             </lightning-combobox>
@@ -16,9 +16,9 @@
 
         <!--Show navigation buttons-->
         <lightning-layout-item class="slds-text-align_right" size="4">
-            <a title="Go to first page" onclick={goToFirstPageHandler} class={previousButtonsStyle}>
+            <!--<a title="Go to first page" onclick={goToFirstPageHandler} class={previousButtonsStyle}>
                 &lt;&lt;
-            </a>
+            </a>-->
             <a  label="<" title="Previous page" onclick={previousPageHandler} class={previousButtonsStyle}>
                 &lt;
             </a>
@@ -39,9 +39,9 @@
             </a>
 
             <!-- Use Also For DESIGN 1:-->
-            <a title="Go to last page" onclick={goToLastPageHandler} class={nextButtonsStyle}>
+            <!--<a title="Go to last page" onclick={goToLastPageHandler} class={nextButtonsStyle}>
                 &gt;&gt;
-            </a>
+            </a>-->
         </lightning-layout-item>
     </lightning-layout>
 </template>

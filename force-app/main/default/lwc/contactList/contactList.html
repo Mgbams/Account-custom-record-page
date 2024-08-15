@@ -1,13 +1,22 @@
 <template>
-    <lightning-card title="Mes Contacts (2)"></lightning-card>
-    <c-highlights-panel is-create-contact="true"></c-highlights-panel>
-    <lightning-card>
-        <div style="height: 300px;">
-            <lightning-datatable
-                key-field="id"
-                data={data}
-                columns={columns}>
-         </lightning-datatable>
-        </div>
-   </lightning-card>
+    <template lwc:if={hasRecords}>
+        <lightning-card title="Mes Contacts (2)"></lightning-card>
+            <c-highlights-panel is-create-contact="true"></c-highlights-panel>
+            <!--LOADER-->
+            <template lwc:if={isLoading}>
+                <lightning-spinner variant="brand" size="large"></lightning-spinner>
+            </template>
+            <lightning-card>
+                <div>
+                    <lightning-datatable
+                        key-field="id"
+                        data={recordsToDisplay}
+                        columns={columns}>
+                </lightning-datatable>
+                </div>
+                <!--PAGINATION-->
+            <c-paginator lwc:if={showPaginator} page-size={pageSize} total-records={totalRecords} 
+            items-per-page-options={itemsPerPageOptions} onpaginationchange={paginationChangeHandler}></c-paginator>
+        </lightning-card>
+    </template>
 </template>

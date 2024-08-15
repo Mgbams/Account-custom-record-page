@@ -1,21 +1,25 @@
-public with sharing class PaginationDemoController {
+public without sharing class PaginationDemoController {
     
     @AuraEnabled(cacheable = true)
-    public static List<Contact> getContacts(Integer pageSize, Integer offset) {
-        List<Contact> conList = [SELECT Id, Name, Phone, Email, Department 
-                                 FROM Contact
-                                 ORDER BY Id 
-                                 LIMIT :pageSize OFFSET : offset];
-        return conList;
+    public static List<Contact> getContacts(Integer pageSize, String lastRecordId) {
+        String query = 'SELECT Id, FirstName, LastName, Phone, Email, Department FROM Contact ';
+        if (String.isNotBlank(lastRecordId)) {
+            query += 'WHERE Id > :lastRecordId';
+        }
+                         
+        query += ' ORDER BY Id LIMIT :pageSize';
+        return Database.query(query);
     }
 
     @AuraEnabled(cacheable = true)
-    public static List<Opportunity> getOpportunities(Integer pageSize, Integer offset) {
-       List<Opportunity> oppList = [SELECT Id, Name, StageName, Amount, AccountId 
-                                    FROM Opportunity 
-                                    ORDER BY Id 
-                                    LIMIT :pageSize OFFSET : offset];
-        return oppList;
+    public static List<Opportunity> getOpportunities(Integer pageSize, String lastRecordId) {
+        String query = 'SELECT Id, StageName, Amount, AccountId FROM Opportunity ';
+        if (String.isNotBlank(lastRecordId)) {
+            query += 'WHERE Id > :lastRecordId';
+        }
+                         
+        query += ' ORDER BY Id LIMIT :pageSize';
+        return Database.query(query);
     }
 
     /*@AuraEnabled(cacheable = true)
@@ -40,6 +44,16 @@ public with sharing class PaginationDemoController {
     @AuraEnabled(cacheable = true)
     public static Integer getTotalContactsGlCount() {
         return [SELECT COUNT() FROM Contact_GL__c];
+    }
+
+    @AuraEnabled(cacheable = true)
+    public static Integer getTotalContactsCount() {
+        return [SELECT COUNT() FROM Contact];
+    }
+
+    @AuraEnabled(cacheable = true)
+    public static Integer getTotalOpportunitiesCount() {
+        return [SELECT COUNT() FROM Opportunity];
     }
        
 }
